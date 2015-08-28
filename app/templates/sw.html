@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% block content %}
+<h1> show teams for {{ user.name }} </h1>
+    <a href="/team/register"> Go make a new team now! </a>
+    {% for team in teams %}
+    <div><a href= "{{ url_for('teams.team_page', teamid=team.id) }}"> <p>{{ team.id }} : <b>{{ team.name }}</b> by : {{ team.captainName }} </p></a></div>
+
+            {% endfor %}
+<form method="POST" action="{{ url_for('users.logout') }}" class="form">
+  <input type="submit" value="Logout">
+</form>
+{% endblock %}
+

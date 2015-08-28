@@ -1,0 +1,9 @@
+How to run it
+
+$ python shell.py
+>>> from app import db
+>>> db.create_all()
+
+# Before running the app, create db table by following.
+
+$ python run.py 
