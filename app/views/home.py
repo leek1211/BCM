@@ -1,9 +1,8 @@
 from flask import Flask, request, render_template, g, session 
 from app import app, db
-from app.users.decorators import requires_login
-from app.users.models import User
-from app.users.forms import LoginForm
-from app.teams.models import Team
+from app.decorators.user import requires_login
+from app.models import User, Team
+from app.forms.user import LoginForm
 
 
 @app.before_request

@@ -1,10 +1,9 @@
 from flask import Blueprint, request, flash, render_template, g, session, redirect, url_for
 
 from app import db
-from app.users.decorators import requires_login
-from app.users.models import User
-from app.teams.models import Team
-from app.teams.forms import RegisterForm
+from app.decorators.user import requires_login
+from app.models import User, Team
+from app.forms.team import RegisterForm
 mod = Blueprint('teams', __name__,url_prefix='/team')
 
 @mod.before_request

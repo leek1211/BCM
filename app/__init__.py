@@ -38,12 +38,11 @@ install_secret_key(app)
 def not_found(error):
     return render_template('404.html'), 404
 
-from app import main_view
-
-from app.users.views import mod as usersModule
-from app.teams.views import mod as teamsModule
-app.register_blueprint(usersModule)
+from app.views import home 
+from app.views.user import mod as usersModule
+from app.views.team import mod as teamsModule
 app.register_blueprint(teamsModule)
+app.register_blueprint(usersModule)
 
 # Later on you'll import the other blueprints the same way:
 #from app.comments.views import mod as commentsModule
