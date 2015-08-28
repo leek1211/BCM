@@ -1,3 +1,6 @@
 *.pyc
 *.db
 instance/
+
+# grip README.md --export
+README.html
