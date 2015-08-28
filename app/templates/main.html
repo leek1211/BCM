@@ -37,10 +37,17 @@
   <div class="container">
     {% if 'user_id' in session %}
     <h1>Welcome, {{ user.name }} !</h1>
+    <p> Your teams: 
+    
+    {% for team in user.teams %}
+    {{ team.name }} ,
+    {% endfor %}
+    </p>
+
     {% else %}
     <h1>Welcome</h1>
+    <p> Please signin for more </p>
     {% endif %}
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
   </div>
 </div>

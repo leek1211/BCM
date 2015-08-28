@@ -36,4 +36,16 @@ def team_register():
         return redirect(url_for('home'))
     return render_template('team/register.html', form=form)
 
+@mod.route('/<teamid>/apply/', methods = ['POST'])
+@requires_login
+def team_apply(teamid):
+    team = Team.query.filter_by(id=teamid).first_or_404()
 
+    member_ids = map(lambda x: int(x.id), team.members)
+    cur_user_id = g.user.id
+
+    if member_ids.count(g.user.id) == 0: 
+        team.members.append(g.user)
+        db.session.commit()
+    else : flash('You are already in the team')
+    return redirect(url_for('team.team_page', teamid=teamid))

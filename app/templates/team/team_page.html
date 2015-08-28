@@ -6,7 +6,12 @@
   <li> {{ member.name }} </li>
   {% endfor %}
 </ul>
-<div> Established in {{ team.created_at }} </div>
+
+<form method="POST" action = "{{ url_for( 'team.team_apply', teamid=team.id) }}">
+  <button type="submit" class="btn btn-success">Join Now</button>
+</form>
+
+<footer> Established in {{ team.created_at }} </footer>
 
 
 {% endblock %}
