@@ -6,7 +6,7 @@ from app.forms.user import RegisterForm, LoginForm
 from app.models import User
 from app.decorators.user import requires_login
 
-mod = Blueprint('users', __name__)
+mod = Blueprint('user', __name__)
 
 @mod.before_request
 def before_request():
@@ -37,7 +37,7 @@ def login():
       flash('Welcome %s' % user.name)
       return redirect(url_for('home'))
     flash('Wrong email or password', 'error-message')
-  return render_template("users/login.html", form=form)
+  return render_template("user/login.html", form=form)
 
 @mod.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -59,8 +59,8 @@ def register():
     # flash will display a message to the user
     flash('Thanks for registering')
     # redirect user to the 'home' method of the user module.
-    return redirect(url_for('users.login'))
-  return render_template("users/register.html", form=form)
+    return redirect(url_for('user.login'))
+  return render_template("user/register.html", form=form)
 @mod.route('/logout/', methods=['POST'])
 @requires_login
 def logout():

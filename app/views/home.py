@@ -16,7 +16,7 @@ def before_request():
 def home():
   all_teams = Team.query.all()
   for team in all_teams:
-      team.captainName = User.query.filter_by(id=team.captain).first().name
+      team.memberNames= map(lambda x:str(x.name), team.members)
 
   rows = map(None, *(iter(all_teams),) * 3)
 

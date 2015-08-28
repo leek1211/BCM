@@ -1,7 +1,11 @@
 {% extends "base.html"%}
 {% block content %}
 <h1> {{ team.name }}'s page </h1>
-<div> captain: {{ captain.name }} </div>
+<ul> 
+  {% for member in members %}
+  <li> {{ member.name }} </li>
+  {% endfor %}
+</ul>
 <div> Established in {{ team.created_at }} </div>
 
 

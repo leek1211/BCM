@@ -4,7 +4,7 @@ from app import db
 from app.decorators.user import requires_login
 from app.models import User, Team
 from app.forms.team import RegisterForm
-mod = Blueprint('teams', __name__,url_prefix='/team')
+mod = Blueprint('team', __name__,url_prefix='/team')
 
 @mod.before_request
 def before_request():
@@ -16,9 +16,9 @@ def before_request():
 @requires_login
 def team_page(teamid):
     team = Team.query.filter_by(id=teamid).first_or_404()
-    captain = User.query.filter_by(id=team.captain).first()
+    members = team.members
 
-    return render_template('teams/team_page.html', team=team, captain=captain)
+    return render_template('team/team_page.html', team=team, members=members)
 
 @mod.route('/register/', methods = ['GET', 'POST'])
 @requires_login
@@ -29,10 +29,11 @@ def team_register():
     form = RegisterForm(request.form)
     if form.validate_on_submit():
         newTeam = Team(name=form.name.data, captain=g.user.id)
+        newTeam.members.append(g.user)
         db.session.add(newTeam)
         db.session.commit()
 
         return redirect(url_for('home'))
-    return render_template('teams/register.html', form=form)
+    return render_template('team/register.html', form=form)
 
 
