@@ -1,8 +1,8 @@
 {% macro render_field(field) %}
 
-<div class="form_field">
+<div class="form-group">
 
-  {{ field.label(class="label") }}
+  {{ field.label() }}
 
   {% if field.errors %}
 
