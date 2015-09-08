@@ -1,5 +1,5 @@
-# BCM
-Basketball club team matcher
+# MRS
+Movie recommendation system
 
 ### How to install
 Install libraries:
