@@ -1,22 +1,5 @@
 {% extends "base.html" %}
-{% block header %}
-<div class="navbar-form navbar-left"> 
-  <button onclick="window.location.href='{{ url_for("team.team_register") }}'" class="btn btn-info">Create a New Team!</button>
-</div>
 
-<div class="navbar-form navbar-right">
-  {% if not 'user_id' in session %}
-  <button onclick="window.location.href='{{ url_for("user.login") }}'" class="btn btn-success">Sign in</button>
-  <button onclick="window.location.href='{{ url_for("user.register") }}'" class="btn btn-success">Sign up</button>
-
-  {% else %}
-  <form method="POST" action="{{ url_for('user.logout') }}">
-    <button type="submit" class="btn btn-warning">Sign out </button>
-  </form>
-  {% endif %}
-</div>
-
-{% endblock %}
 {% block content %}
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -54,7 +37,7 @@
 
       <p> Team Members:
         {% for memberName in team.memberNames %}
-          {{ memberName}} 
+        {{ memberName}} 
         {% endfor %}
       </p>
       <p><a class="btn btn-default" href="{{ url_for('team.team_page', teamid=team.id) }}" role="button">View details &raquo;</a></p>

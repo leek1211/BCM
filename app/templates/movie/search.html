@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="jumbotron"> {{ res['total_results'] }} results found
+  <div class='container'>
+    {% for s in res['results'] %}
+    <div class='col-md-4'>
+      <h2> {{ s['title'] }} ({{ s['release_date'][0:4] }}) </h2>
+      <img src="https://image.tmdb.org/t/p/w150/{{ s['poster_path'] }}" alt="No Image" height="150" width="150"/>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
