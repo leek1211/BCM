@@ -1,14 +1,9 @@
 from flask import Blueprint, request, flash, render_template, g, session, redirect, url_for
 
-from app import db
+from app import db,tmdb
 from app.decorators.user import requires_login
 from app.models import User
-from app.forms.team import RegisterForm
 mod = Blueprint('movie', __name__)
-
-
-import tmdbsimple as tmdb
-tmdb.API_KEY = '9b28b589e4b6afc064926f2e8af69d27'
 
 @mod.before_request
 def before_request():
@@ -26,3 +21,10 @@ def movie_search(title):
 
     return render_template('movie/search.html', res=response)
 
+@mod.route('/movie/<id>/')
+@requires_login
+def movie_info(id):
+    
+    m = tmdb.Movies(id)
+
+    return render_template('movie/info.html', movie=m.info(), credits = m.credits())

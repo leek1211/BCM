@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+  <h1>{{ movie['title'] }}</h1>
+  <img src=
+  {% if movie['poster_path'] %}
+  "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
+  {% else %}
+  "/static/img/image-not-found.png"
+  {% endif %}
+  height="150" width="150"/>
+  {% for cast in credits['cast'] %}
+  <div> {{ cast.name }} </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}

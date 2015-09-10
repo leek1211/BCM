@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, g, session 
-from app import app, db
+from app import app, db, tmdb
 from app.decorators.user import requires_login
-from app.models import User, Team
+from app.models import User
 from app.forms.user import LoginForm
 
 @app.before_request
@@ -13,11 +13,9 @@ def before_request():
 
 @app.route('/')
 def home():
-  all_teams = Team.query.all()
-  for team in all_teams:
-      team.memberNames= map(lambda x: x.name, team.members)
+  movies = tmdb.Movies('popular').info()['results'][1:20]
 
-  rows = map(None, *(iter(all_teams),) * 3)
+  rows = map(None, *(iter(movies),) * 3)
 
   return render_template("main.html", user=g.user, rows=rows)
 

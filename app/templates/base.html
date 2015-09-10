@@ -51,6 +51,9 @@
                 <input type='button' class='btn btn-info' value="search!"></button>
             </form>
           </div>
+              <button onclick="window.location.href='{{ url_for("user.profile", userid=session["user_id"]) }}'" class="btn btn-success">My page</button>
+
+
           <div class="navbar-form navbar-right">
             {% if not 'user_id' in session %}
             <button onclick="window.location.href='{{ url_for("user.login") }}'" class="btn btn-success">Sign in</button>

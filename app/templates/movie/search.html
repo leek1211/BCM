@@ -4,12 +4,22 @@
 <div class="jumbotron"> {{ res['total_results'] }} results found
   <div class='container'>
     {% for s in res['results'] %}
-    <div class='col-md-4'>
-      <h2> {{ s['title'] }} ({{ s['release_date'][0:4] }}) </h2>
-      <img src="https://image.tmdb.org/t/p/w150/{{ s['poster_path'] }}" alt="No Image" height="150" width="150"/>
+    <div class='col-md-4' >
+      <h2><a href='/movie/{{ s["id"] }}/'> {{ s['title'] }} 
+        {% if s['release_date'] %}
+        ({{ s['release_date'][0:4] }})
+        {% endif %}
+      </a>
+      </h2>
+      <img src=
+      {% if s['poster_path'] %}
+      "https://image.tmdb.org/t/p/w150/{{ s['poster_path'] }}"
+      {% else %}
+      "/static/img/image-not-found.png"
+      {% endif %}
+      height="150" width="150" href='/movie/{{ s["id"] }}/' />
     </div>
     {% endfor %}
-
   </div>
 </div>
 

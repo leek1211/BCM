@@ -61,9 +61,17 @@ def register():
     # redirect user to the 'home' method of the user module.
     return redirect(url_for('user.login'))
   return render_template("user/register.html", form=form)
+
 @mod.route('/logout/', methods=['POST'])
 @requires_login
 def logout():
     session.pop('user_id', None)
     flash('You were logged out')
     return redirect(url_for('home'))
+
+@mod.route('/profile/<userid>')
+@requires_login
+def profile(userid):
+
+    return render_template('user/profile.html', user=User.query.filter_by(id=userid).first_or_404())
+

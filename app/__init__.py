@@ -9,6 +9,9 @@ app.config.from_object('config')
 
 db = SQLAlchemy(app)
 
+import tmdbsimple as tmdb
+tmdb.API_KEY = app.config['TMDB_API_KEY']
+
 ########################
 # Configure Secret Key #
 ########################
@@ -40,14 +43,6 @@ def not_found(error):
 
 from app.views import home 
 from app.views.user import mod as userModule
-from app.views.team import mod as teamModule
 from app.views.movie import mod as movieModule
-app.register_blueprint(teamModule)
 app.register_blueprint(userModule)
 app.register_blueprint(movieModule)
-
-# Later on you'll import the other blueprints the same way:
-#from app.comments.views import mod as commentsModule
-#from app.posts.views import mod as postsModule
-#app.register_blueprint(commentsModule)
-#app.register_blueprint(postsModule)
