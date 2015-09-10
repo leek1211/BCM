@@ -71,7 +71,6 @@ def logout():
 
 @mod.route('/profile/<userid>')
 @requires_login
-def profile(userid):
-
+def user_profile(userid):
     return render_template('user/profile.html', user=User.query.filter_by(id=userid).first_or_404())
 

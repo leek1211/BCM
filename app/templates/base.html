@@ -51,7 +51,7 @@
                 <input type='button' class='btn btn-info' value="search!"></button>
             </form>
           </div>
-              <button onclick="window.location.href='{{ url_for("user.profile", userid=session["user_id"]) }}'" class="btn btn-success">My page</button>
+              <button onclick="window.location.href='{{ url_for("user.user_profile", userid=session["user_id"]) }}'" class="btn btn-success">My page</button>
 
 
           <div class="navbar-form navbar-right">

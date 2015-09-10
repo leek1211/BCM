@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
+{% block import %}
+<script src="/static/js/rating.js"> </script>
+{% endblock %}
+
 {% block content %}
 
 <div>
-  <h1>{{ movie['title'] }}</h1>
+  <h1>{{ movie['title'] }} 
+    {% if review != None %}
+    (Reviewed)
+    {% endif %}
+  </h1>
+  
   <img src=
   {% if movie['poster_path'] %}
   "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
@@ -15,6 +24,28 @@
   <div> {{ cast.name }} </div>
   {% endfor %}
 </div>
+<div> 
+  <form method="POST" action="{{ url_for('review.review_rate', movie_id=movie['id']) }}" id="star-rating">
+
+    <input type="radio" class="1-star" name="rating" value=1 />
+    <input type="radio" class="2-star" name="rating" value=2 />
+    <input type="radio" class="3-star" name="rating" value=3 />
+    <input type="radio" class="4-star" name="rating" value=4 />
+    <input type="radio" class="5-star" name="rating" value=5 />
+    <input type="radio" class="6-star" name="rating" value=6 />
+    <input type="radio" class="7-star" name="rating" value=7 />
+    <input type="radio" class="8-star" name="rating" value=8 />
+    <input type="radio" class="9-star" name="rating" value=9 />
+    <input type="radio" class="10-star" name="rating" value=10 />
+
+    <input type="submit" value="rate it" class="button button-default">
+
+  </form>
+  {% if review != None %}
+  <script> 
+    show_rate({{ review.rate }});
+  </script>
+  {% endif %}
 
 
-{% endblock %}
+  {% endblock %}

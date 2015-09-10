@@ -44,5 +44,7 @@ def not_found(error):
 from app.views import home 
 from app.views.user import mod as userModule
 from app.views.movie import mod as movieModule
+from app.views.review import mod as reviewModule
 app.register_blueprint(userModule)
 app.register_blueprint(movieModule)
+app.register_blueprint(reviewModule)

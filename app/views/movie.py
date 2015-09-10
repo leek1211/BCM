@@ -24,7 +24,5 @@ def movie_search(title):
 @mod.route('/movie/<id>/')
 @requires_login
 def movie_info(id):
-    
     m = tmdb.Movies(id)
-
-    return render_template('movie/info.html', movie=m.info(), credits = m.credits())
+    return render_template('movie/info.html', movie=m.info(), credits = m.credits(), review=g.user.get_review(id))
