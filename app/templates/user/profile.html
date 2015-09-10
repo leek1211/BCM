@@ -5,7 +5,7 @@
   {% for review in user.reviews %}
   <div>
     <p> {{ review.get_movie().info()['title'] }} </p>
-    <p> rated: {{ review.rate }} </p>
+    <p> rated: {{ review.rating}} </p>
   </div>
   {% endfor %}
 </div>
