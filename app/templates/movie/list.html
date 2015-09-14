@@ -1,0 +1,51 @@
+<script src="/static/js/movie/info.js"> </script>
+<script src="/static/js/movie/rating.js"> </script>
+{% for row in rows %}
+<div class="row">
+
+  {% for movie in row %}
+  {% if movie != None %}
+
+  <div class="col-md-4">
+    <button onclick="get_movie_modal({{ movie['id'] }});">
+      <img src=
+      {% if movie['poster_path'] %}
+      "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
+      {% else %}
+      "/static/img/image-not-found.png"
+      {% endif %}
+      height="150" width="150" onclick="get_movie_modal({{ movie['id'] }});"/>
+    </button>
+
+    <h2>{{ movie['title'] }}</h2>
+    <p> release date : {{ movie['release_date'] }} </p>
+    <p><button class="movie-info btn btn-default" onclick="get_movie_modal({{ movie['id'] }});" role="button">View details &raquo;</button></p>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endfor %}
+<!-- Modal HTML -->
+<div id="movie-info-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Confirmation</h4>
+      </div>
+      <div class="modal-body" id="movie-info-modal-body" >
+        <p class="text-warning">
+          Loading...
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+

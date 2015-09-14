@@ -19,10 +19,12 @@ def movie_search(title):
     if response['total_results'] > 100:
         response['results'] = response['results'][0:100]
 
-    return render_template('movie/search.html', res=response)
+    rows = map(None, *(iter(response['results']),) * 3)
+
+    return render_template('movie/search.html', total_results=response['total_results'], rows=rows)
 
 @mod.route('/movie/<id>/')
 @requires_login
 def movie_info(id):
     m = tmdb.Movies(id)
-    return render_template('movie/info.html', movie=m.info(), credits = m.credits(), review=g.user.get_review(id))
+    return render_template('movie/info.html', movie=m.info(), casts=m.credits()['cast'], crews=m.credits()['crew'], review=g.user.get_review(id))

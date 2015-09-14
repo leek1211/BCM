@@ -21,7 +21,7 @@ def review_rate(movie_id):
     rating = int(request.form['rating'])
     myReview = g.user.get_review(movie_id) 
     if myReview:
-        myReview.rate = rating
+        myReview.rating = rating
         db.session.commit()
     else :
         review = Review(movie_id=movie_id, user_id=g.user.id, rating=rating)

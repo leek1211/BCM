@@ -1,56 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
   <div class="container">
     {% if 'user_id' in session %}
     <h1>Welcome, {{ user.name }} !</h1>
+    <p><a class="btn btn-primary btn-lg" href= '{{ url_for("user.user_profile", userid=session["user_id"]) }}' role="button">My page&raquo;</a></p>
     {% else %}
     <h1>Welcome</h1>
     <p> Please signin for more </p>
-    {% endif %}
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    {% endif %}
   </div>
 </div>
 
 <div class="container">
   <!-- Example row of columns -->
-
-  {% for row in rows %}
-  <div class="row">
-
-    {% for movie in row %}
-    {% if movie != None %}
-
-    <div class="col-md-4">
-      <a href="{{ url_for('movie.movie_info', id=movie.id) }}" >
-        <img src=
-        {% if movie['poster_path'] %}
-        "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
-        {% else %}
-        "/static/img/image-not-found.png"
-        {% endif %}
-        height="150" width="150" href='/movie/{{ movie["id"] }}/' />
-      </a>
-
-      <h2>{{ movie['title'] }}</h2>
-      <p> release date : {{ movie['release_date'] }} </p>
-      <p><a class="btn btn-default" href="{{ url_for('movie.movie_info', id=movie.id) }}" role="button">View details &raquo;</a></p>
-    </div>
-    {% endif %}
-    {% endfor %}
-  </div>
-  {% endfor %}
-
+  <h2> Popular Movie List </h2>
+  {% include 'movie/list.html' %}
   <hr>
   <footer>
     <p>&copy; Company 2014</p>
   </footer>
 
+
 </div> <!-- /container -->
-
-
 {% endblock %}
+
 

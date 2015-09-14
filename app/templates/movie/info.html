@@ -1,32 +1,10 @@
-{% extends "base.html" %}
-
-{% block import %}
-<script src="/static/js/rating.js"> </script>
-{% endblock %}
-
-{% block content %}
-
 <div>
   <h1>{{ movie['title'] }} 
     {% if review != None %}
     (Reviewed)
     {% endif %}
   </h1>
-  
-  <img src=
-  {% if movie['poster_path'] %}
-  "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
-  {% else %}
-  "/static/img/image-not-found.png"
-  {% endif %}
-  height="150" width="150"/>
-  {% for cast in credits['cast'] %}
-  <div> {{ cast.name }} </div>
-  {% endfor %}
-</div>
-<div> 
-  <form method="POST" action="{{ url_for('review.review_rate', movie_id=movie['id']) }}" id="star-rating">
-
+  <div id="star-rating">
     <input type="radio" class="1-star" name="rating" value=1 />
     <input type="radio" class="2-star" name="rating" value=2 />
     <input type="radio" class="3-star" name="rating" value=3 />
@@ -38,14 +16,24 @@
     <input type="radio" class="9-star" name="rating" value=9 />
     <input type="radio" class="10-star" name="rating" value=10 />
 
-    <input type="submit" value="rate it" class="button button-default">
+    <button class="button button-default" onclick ="rate_movie('{{url_for('review.review_rate', movie_id=movie['id']) }}');" >Rate it! </button>
 
-  </form>
-  {% if review != None %}
-  <script> 
-    show_rate({{ review.rating }});
-  </script>
+  </div>
+  <img src=
+  {% if movie['poster_path'] %}
+  "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
+  {% else %}
+  "/static/img/image-not-found.png"
   {% endif %}
+  height="150" width="150"/>
+  {% for cast in casts[0:5] %}
+  <div> {{ cast.name }} </div>
+  {% endfor %}
+</div>
 
+{% if review != None %}
+<script> 
+  show_rate({{ review.rating }});
+</script>
+{% endif %}
 
-  {% endblock %}
