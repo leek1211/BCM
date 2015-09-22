@@ -7,19 +7,22 @@
   {% if movie != None %}
 
   <div class="col-md-4">
-    <button onclick="get_movie_modal({{ movie['id'] }});">
+    <div class="movie-buttons" onclick="get_movie_modal({{ movie['id'] }});">
       <img src=
       {% if movie['poster_path'] %}
       "https://image.tmdb.org/t/p/w150/{{ movie['poster_path'] }}"
       {% else %}
       "/static/img/image-not-found.png"
       {% endif %}
-      height="150" width="150" onclick="get_movie_modal({{ movie['id'] }});"/>
-    </button>
-
-    <h2>{{ movie['title'] }}</h2>
-    <p> release date : {{ movie['release_date'] }} </p>
-    <p><button class="movie-info btn btn-default" onclick="get_movie_modal({{ movie['id'] }});" role="button">View details &raquo;</button></p>
+      height="150" width="150" />
+      {% if movie['expected'] != None %}
+      <h2>{{ movie['title'] }} ({{ movie['expected'] }})</h2>
+      {% else %}
+      <h2>{{ movie['title'] }} </h2>
+      {% endif %}
+      <p> release date : {{ movie['release_date'] }} </p>
+      <br/>
+    </div>
   </div>
   {% endif %}
   {% endfor %}

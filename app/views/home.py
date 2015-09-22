@@ -12,6 +12,7 @@ def before_request():
 
 
 @app.route('/')
+@requires_login
 def home():
   movies = tmdb.Movies('popular').info()['results'][1:20]
 

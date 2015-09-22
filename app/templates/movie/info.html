@@ -29,6 +29,10 @@
   {% for cast in casts[0:5] %}
   <div> {{ cast.name }} </div>
   {% endfor %}
+  <h2> genre </h2>
+  {% for genre in movie['genres'] %}
+  <p> {{ genre['name'] }} </p>
+  {% endfor %}
 </div>
 
 {% if review != None %}

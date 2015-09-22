@@ -37,6 +37,8 @@ def install_secret_key(app, filename='secret_key'):
 
 install_secret_key(app)
 
+genre_list = map(lambda x: x['id'], tmdb.Genres().list()['genres'])
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
