@@ -15,7 +15,7 @@
       "/static/img/image-not-found.png"
       {% endif %}
       height="150" width="150" />
-      {% if movie['expected'] != None %}
+      {% if movie.has_key('expected')  %}
       <h2>{{ movie['title'] }} ({{ movie['expected'] }})</h2>
       {% else %}
       <h2>{{ movie['title'] }} </h2>
