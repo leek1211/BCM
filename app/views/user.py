@@ -72,5 +72,11 @@ def logout():
 @mod.route('/profile/<userid>')
 @requires_login
 def user_profile(userid):
-    return render_template('user/profile.html', user=User.query.filter_by(id=userid).first_or_404())
+    user = User.query.filter_by(id=userid).first_or_404() 
+    reviewed_movies = map(lambda x: x.get_movie().info(), user.reviews)
+    for (m,r) in zip(reviewed_movies, user.reviews) :
+        m['rating'] = r.rating
+
+
+    return render_template('user/profile.html', user=user, movies = reviewed_movies)
 

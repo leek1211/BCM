@@ -2,11 +2,17 @@
 {% block content %}
 <h1> {{ user.name }}'s page </h1>
 <div> review list
-  {% for review in user.reviews %}
+  {% for movie in movies %}
   <div>
-    <p> {{ review.get_movie().info()['title'] }} </p>
-    <p> rated: {{ review.rating}} </p>
+    <p> {{ movie['title'] }} </p>
+    <p> rated: {{ movie['rating'] }} </p>
+    <p> genres: 
+      {% for g in movie['genres'] %}
+      {{ g['name'] }} 
+      {% endfor %}
+    </p>
   </div>
+  <br/>
   {% endfor %}
 </div>
 {% endblock %}
